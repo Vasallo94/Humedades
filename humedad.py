@@ -16,8 +16,8 @@ st.set_option("deprecation.showPyplotGlobalUse", False)
 st.title("Humedades")
 
 # --------------------IMPORTACIÓN DE LOS DATAFRAME----------------------------#
-df_habitacion = pd.read_csv(r"data/Habitación_export_202303131817.csv")
-df_salon = pd.read_csv(r"data/Salón_export_202303131824.csv")
+df_habitacion = pd.read_csv("data/Habitación_export_202303131817.csv")
+df_salon = pd.read_csv("data/Salón_export_202303131824.csv")
 
 # Renombrar la columna "Registro temporal para frecuencia de muestreo cada 1 min min" a "registro temporal"
 # df_salon = df_salon.rename(
