@@ -31,7 +31,7 @@ df = df.reorder_levels([1, 0]).sort_index()
 ubicaciones_disponibles = ["habitación", "salón"]
 # valores predeterminados para la selección de ubicaciones
 ubicaciones_predeterminadas = st.sidebar.multiselect(
-    "Selecciona ubicaciones", ubicaciones_disponibles
+    "Selecciona la ubicación", ubicaciones_disponibles
 )
 st.dataframe(df)
 # verificar que los valores predeterminados estén en la lista de opciones
@@ -41,11 +41,11 @@ ubicaciones_validas = [
     if ubicacion in ubicaciones_disponibles
 ]
 
-# --------------------SIDEBAR----------------------------#
-# st.sidebar.image("img/logo.png", width=150)
-st.sidebar.title("MENÚ")
-st.sidebar.subheader("")
-st.sidebar.write("")
+# # --------------------SIDEBAR----------------------------#
+# # st.sidebar.image("img/logo.png", width=150)
+# st.sidebar.title("MENÚ")
+# st.sidebar.subheader("")
+# st.sidebar.write("")
 
 # mostrar la selección de ubicaciones válidas y plotear con la decisión
 if ubicaciones_validas:
