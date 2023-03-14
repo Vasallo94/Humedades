@@ -14,23 +14,12 @@ st.set_page_config(page_title="Humedades", layout="wide", page_icon="💦")
 st.set_option("deprecation.showPyplotGlobalUse", False)
 
 st.title("Humedades")
+st.subtitle("Primeros acercamientos al problema de humedades que tengo en mi casa. En desarrollo...")
 
 # --------------------IMPORTACIÓN DE LOS DATAFRAME----------------------------#
 df_habitacion = pd.read_csv("data/Habitacion_export_202303131817.csv")
 df_salon = pd.read_csv("data/Salon_export_202303131824.csv")
 
-# Renombrar la columna "Registro temporal para frecuencia de muestreo cada 1 min min" a "registro temporal"
-# df_salon = df_salon.rename(
-#     columns={
-#         "Registro temporal para frecuencia de muestreo cada 1 min": "registro temporal"
-#     }
-# )
-# df_habitacion = df_habitacion.rename(
-#     columns={
-#         "Registro temporal para frecuencia de muestreo cada 1 min": "registro temporal"
-#     }
-# )
-# ! no entiendo por qué no funciona la mierda del rename...
 
 # Concatenar los dataframes en uno solo con Multiíndice
 df = pd.concat(
@@ -50,6 +39,12 @@ ubicaciones_validas = [
     for ubicacion in ubicaciones_predeterminadas
     if ubicacion in ubicaciones_disponibles
 ]
+
+# --------------------SIDEBAR----------------------------#
+# st.sidebar.image("img/logo.png", width=150)
+st.sidebar.title("MENÚ")
+st.sidebar.subheader("")
+st.sidebar.write("")
 
 # mostrar la selección de ubicaciones válidas y plotear con la decisión
 if ubicaciones_validas:
@@ -79,8 +74,3 @@ if ubicaciones_validas:
 else:
     st.warning("Por favor, selecciona al menos una ubicación.")
 
-# --------------------SIDEBAR----------------------------#
-# st.sidebar.image("img/logo.png", width=150)
-st.sidebar.title("MENÚ")
-st.sidebar.subheader("")
-st.sidebar.write("")
