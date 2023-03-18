@@ -39,15 +39,15 @@ if ubicaciones_validas:
 
     # Line chart for temperature over time
     fig1 = px.line(x=df_seleccionado["Registro_temporal"], y=df_seleccionado["Temperatura_Celsius"])
-    st.plotly_chart(fig1)
+    st.plotly_chart(fig1, use_container_width=True)
 
     # Line chart for humidity over time
     fig2 = px.line(df_seleccionado, x=df_seleccionado["Registro_temporal"], y=df_seleccionado["Humedad_relativa[%]"])
-    st.plotly_chart(fig2)
+    st.plotly_chart(fig2, use_container_width=True)
 
     # Line chart for temperature and humidity over time, grouped by location
     fig3 = px.line(df_seleccionado, x="Registro_temporal", y=["Temperatura_Celsius", "Humedad_relativa[%]"], color=df_seleccionado.index.get_level_values(0))
-    st.plotly_chart(fig3)
+    st.plotly_chart(fig3, use_container_width=True)
 
 else:
     st.warning("Por favor, selecciona al menos una ubicación.")
