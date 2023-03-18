@@ -1,6 +1,6 @@
 # Welcome to My Home Climate App!
 
-This Streamlit app displays temperature and humidity data from sensors in my home. The data is collected using a Grovee sensor and saved in a CSV file.
+This project is a web application developed using Streamlit that displays temperature and humidity data from IoT sensors in my home. The data is collected using a Grove sensor and saved in a CSV file. Additionally, the application includes interactive charts that allow you to visualize the variables' evolution over time.
 
 ## Installation
 
