@@ -64,14 +64,14 @@ if ubicaciones_validas:
         y=df_seleccionado["Humedad_relativa[%]"],
     )
     st.plotly_chart(fig2)
-    # fig3 = px.line(
-    #     df_seleccionado,
-    #     x="Registro_temporal",
-    #     y=["Temperatura_Celsius", "Humedad_relativa[%]"],
-    #     color=df_seleccionado.index.get_level_values(0),
-    # )
-    # # Mostrar gráfico en Streamlit
-    # st.plotly_chart(fig3)
+    fig3 = px.line(
+        df_seleccionado,
+        x="Registro_temporal",
+        y=["Temperatura_Celsius", "Humedad_relativa[%]"],
+        color=df_seleccionado.index.get_level_values(0),
+    )
+    # Mostrar gráfico en Streamlit
+    st.plotly_chart(fig3)
 else:
     st.warning("Por favor, selecciona al menos una ubicación.")
 
