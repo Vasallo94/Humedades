@@ -16,7 +16,7 @@ st.set_option("deprecation.showPyplotGlobalUse", False)
 # --------------------LOAD DATAFRAMES----------------------------#
 # Load CSV files for temperature and humidity data from two sensors in the house
 try:
-    df_habitacion = pd.read_csv("data/Habitación_export_202303182309.csv")
+    df_habitacion = pd.read_csv("data/Habitacion_export_202303182309.csv")
     df_salon = pd.read_csv("data/Salon_export_202303182309.csv")
 except FileNotFoundError:
     st.warning("No se encontraron los archivos CSV. Por favor, asegúrate de que estén en la carpeta 'data' y con los nombres correctos.")
