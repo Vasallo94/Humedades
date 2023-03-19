@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Load the data
-df_habitacion = pd.read_csv("data/Habitación_export_202303182309.csv")
+df_habitacion = pd.read_csv("data/Habitacion_export_202303182309.csv")
 df_salon = pd.read_csv("data/Salon_export_202303182309.csv")
 
 # Concatenate the dataframes with a multi-index
