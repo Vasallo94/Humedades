@@ -14,9 +14,9 @@ This project is a web application developed using Streamlit that displays temper
 
 ## Usage
 
-1. Open the Streamlit app in your browser.
+1. Open the Streamlit link https://vasallo94-humedades-humedad-v6q5u4.streamlit.app/ in your browser.
 
-2. Upload a CSV file containing the temperature and humidity data.
+2. Select the location.
 
 3. Use the sliders to filter the data by date and time.
 
