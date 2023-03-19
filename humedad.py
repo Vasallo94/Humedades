@@ -64,6 +64,12 @@ if ubicaciones_validas:
     fig3.update_layout(
         title="Temperatura y humedad por ubicación", yaxis_title="Valor")
     st.plotly_chart(fig3, use_container_width=True)
+    # Scatter plot for temperature vs humidity
+    fig4 = px.scatter(df_seleccionado, x="Temperatura_Celsius", y="Humedad_relativa[%]", marginal_x="histogram", marginal_y="box", color="Ubicación", color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, labels={
+                      "Temperatura_Celsius": "Temperatura (Celsius)", "Humedad_relativa[%]": "Humedad relativa (%)", "Ubicación": "Ubicación"})
+    fig4.update_layout(title="Relación entre temperatura y humedad",
+                       xaxis_title="Temperatura (Celsius)", yaxis_title="Humedad relativa (%)")
+    st.plotly_chart(fig4, use_container_width=True)
 
 else:
     st.warning(
