@@ -1,76 +1,25 @@
-# --------------------LIBRARIES----------------------------#
 import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import seaborn as sns
 import plotly_express as px
-import plotly.graph_objects as go
+from utils.funciones_varias import *
 
-
-# --------------------PAGE CONFIGURATION----------------------------#
-# layout="centered" or "wide"
 st.set_page_config(page_title="Humedades", layout="wide", page_icon="💦")
 st.set_option("deprecation.showPyplotGlobalUse", False)
 
-# --------------------LOAD DATAFRAMES----------------------------#
-# Load CSV files for temperature and humidity data from two sensors in the house
-try:
-    df_habitacion = pd.read_csv("data/Habitacion_export_202303182309.csv")
-    df_salon = pd.read_csv("data/Salon_export_202303182309.csv")
-except FileNotFoundError:
-    st.warning("No se encontraron los archivos CSV. Por favor, asegúrate de que estén en la carpeta 'data' y con los nombres correctos.")
-    st.stop()
+df = load_dataframes()
+ubicaciones_predeterminadas = st.sidebar.multiselect("Selecciona la ubicación", ["Habitación", "Salón"], default=["Habitación", "Salón"])
+df_seleccionado = df[df["Ubicación"].isin(ubicaciones_predeterminadas)]
 
-# Concatenate the dataframes with a multi-index
-df = pd.concat([df_habitacion, df_salon], keys=[
-               "Habitación", "Salón"], names=["Ubicación"])
-df = df.reorder_levels([1, 0]).sort_index()
-
-# --------------------SIDEBAR----------------------------#
-# Display the sidebar for selecting locations
-ubicaciones_disponibles = ["Habitación", "Salón"]
-ubicaciones_predeterminadas = st.sidebar.multiselect(
-    "Selecciona la ubicación", ubicaciones_disponibles, default=ubicaciones_disponibles)
-ubicaciones_validas = [
-    ubicacion for ubicacion in ubicaciones_predeterminadas if ubicacion in ubicaciones_disponibles]
-
-
-if ubicaciones_validas:
-    df_seleccionado = df.loc[df.index.get_level_values(
-        "Ubicación").isin(ubicaciones_predeterminadas)]
-
-    # Add a column with location labels for coloring the lines
-    df_seleccionado["Ubicación"] = df_seleccionado.index.get_level_values(
-        "Ubicación").map(lambda x: "Habitación" if x == "Habitación" else "Salón")
-
-    # Line chart for temperature over time
-    fig1 = px.line(df_seleccionado, x="Registro_temporal",
-                   y="Temperatura_Celsius", color="Ubicación", color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, labels={"Temperatura_Celsius": "Temperatura (Celsius)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
-    fig1.update_layout(title="Temperatura",
-                       yaxis_title="Temperatura (Celsius)")
-    st.plotly_chart(fig1, use_container_width=True)
-
-    # Line chart for humidity over time
-    fig2 = px.line(df_seleccionado, x="Registro_temporal",
-                   y="Humedad_relativa[%]", color="Ubicación", color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, labels={"Humedad_relativa[%]": "Humedad relativa (%)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
-    fig2.update_layout(title="Humedad",
-                       yaxis_title="Humedad relativa (%)")
-    st.plotly_chart(fig2, use_container_width=True)
-
-    # Line chart for temperature and humidity over time, grouped by location
-    fig3 = px.line(df_seleccionado, x="Registro_temporal", y=["Temperatura_Celsius", "Humedad_relativa[%]"], color="Ubicación", color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, labels={
-        "value": "Valor", "variable": "Variable", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
-    fig3.update_layout(
-        title="Temperatura y humedad por ubicación", yaxis_title="Valor")
-    st.plotly_chart(fig3, use_container_width=True)
-    # Scatter plot for temperature vs humidity
-    fig4 = px.scatter(df_seleccionado, x="Temperatura_Celsius", y="Humedad_relativa[%]", marginal_x="histogram", marginal_y="box", color="Ubicación", color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, labels={
-                      "Temperatura_Celsius": "Temperatura (Celsius)", "Humedad_relativa[%]": "Humedad relativa (%)", "Ubicación": "Ubicación"})
-    fig4.update_layout(title="Relación entre temperatura y humedad",
-                       xaxis_title="Temperatura (Celsius)", yaxis_title="Humedad relativa (%)")
-    st.plotly_chart(fig4, use_container_width=True)
-
+if df_seleccionado.empty:
+    st.warning("No hay ubicaciones seleccionadas")
+    st.info("Por favor, selecciona una opción de la barra lateral.")
 else:
-    st.warning(
-        "Por favor, seleccione una ubicación válida para mostrar los gráficos")
+    chart_config = {
+        "color": "Ubicación",
+        "color_discrete_map": {"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
+    }
+    create_chart(df_seleccionado, "Registro_temporal", "Temperatura_Celsius", px.line, "Temperatura", "Temperatura (Celsius)", **chart_config)
+    create_chart(df_seleccionado, "Registro_temporal", "Humedad_relativa[%]", px.line, "Humedad", "Humedad relativa (%)", **chart_config)
+    create_chart(df_seleccionado, "Registro_temporal", ["Humedad_relativa[%]", "Temperatura_Celsius"], px.line, "Humedad y temperatura", "Humedad y temperatura", **chart_config)
+    create_chart(df_seleccionado, "Humedad_relativa[%]", "Temperatura_Celsius", px.scatter, "Humedad y temperatura (dispersión)", "Temperatura (Celsius)", "Humedad relativa", marginal_y="histogram", marginal_x="histogram", trendline="ols", trendline_color_override="darkseagreen", **chart_config)
+    create_chart(df_seleccionado, "Registro_temporal", ["Humedad_relativa[%]", "Temperatura_Celsius"], px.line, "Humedad y temperatura por ubicación", "Humedad y temperatura", "Tiempo", height=700, facet_col="Ubicación", **chart_config)
