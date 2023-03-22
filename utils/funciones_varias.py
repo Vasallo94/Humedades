@@ -52,9 +52,8 @@ def create_sidebar(ubicaciones_disponibles, opciones_sampling):
 
 def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
     df_seleccionado = df[df["Ubicación"].isin(ubicaciones_predeterminadas)].copy()
-    df_seleccionado.loc[:, "Registro_temporal"] = pd.to_datetime(df_seleccionado["Registro_temporal"])
-    df_seleccionado = df_seleccionado.set_index(["Ubicación", "Registro_temporal"])
-    df_seleccionado = df_seleccionado.resample(sampling_predeterminado).mean()
+    df_seleccionado.set_index('datetime', inplace=True)
+    df_seleccionado = df_seleccionado.groupby(pd.Grouper(freq=sampling_predeterminado)).mean()
     return df_seleccionado
 
 def create_plotly_charts(df_seleccionado):
