@@ -15,7 +15,7 @@ if df_seleccionado.empty:
     st.info("Por favor, selecciona una opción de la barra lateral.")
 else:
     chart_config = {
-        "color": "Ubicación",
+        "color": "ubicacion",
         "color_discrete_map": {"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
     }
     create_chart(df_seleccionado, "Registro_temporal", "Temperatura_Celsius", px.line, "Temperatura", "Temperatura (Celsius)", **chart_config)
