@@ -54,14 +54,14 @@ def create_plotly_charts(df_seleccionado):
     # Line chart for temperature over time
     figs = []
     fig1 = px.line(df_seleccionado, x=df_seleccionado.index, y="Temperatura_Celsius",
-                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
+                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, color = 'Ubicación',
                    labels={"Temperatura_Celsius": "Temperatura (Celsius)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
     fig1.update_layout(title="Temperatura", yaxis_title="Temperatura (Celsius)")
     figs.append(fig1)
 
     # Line chart for humidity over time
     fig2 = px.line(df_seleccionado, x=df_seleccionado.index, y="Humedad_relativa[%]",
-                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
+                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, color = 'Ubicación',
                    labels={"Humedad_relativa[%]": "Humedad relativa (%)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
     fig2.update_layout(title="Humedad", yaxis_title="Humedad relativa (%)")
     figs.append(fig2)
