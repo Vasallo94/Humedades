@@ -62,7 +62,7 @@ def create_plotly_charts(df_seleccionado):
     # Line chart for humidity over time
     fig2 = px.line(df_seleccionado, x=df_seleccionado.index, y="Humedad_relativa[%]",
                    color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
-                   labels={"Humedad_relativa[%]": "Humedad relativa (%)", "Registro_temporal": "Tiempo", "ubicacion": "Ubicación"})
+                   labels={"Humedad_relativa[%]": "Humedad relativa (%)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
     fig2.update_layout(title="Humedad", yaxis_title="Humedad relativa (%)")
     figs.append(fig2)
     return figs
