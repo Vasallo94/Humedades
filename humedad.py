@@ -8,7 +8,7 @@ st.set_option("deprecation.showPyplotGlobalUse", False)
 
 df = load_dataframes()
 ubicaciones_predeterminadas = st.sidebar.multiselect("Selecciona la ubicación", ["Habitación", "Salón"], default=["Habitación", "Salón"])
-df_seleccionado = df[df["Ubicación"].isin(ubicaciones_predeterminadas)]
+df_seleccionado = df[df["ubicacion"].isin(ubicaciones_predeterminadas)]
 
 if df_seleccionado.empty:
     st.warning("No hay ubicaciones seleccionadas")
