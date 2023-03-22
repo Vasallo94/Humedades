@@ -10,9 +10,9 @@ def load_dataframes():
     except FileNotFoundError:
         st.warning("No se encontraron los archivos CSV. Por favor, asegúrate de que estén en la carpeta 'data' y con los nombres correctos.")
         st.stop()
-    df_habitacion["Ubicación"] = "Habitación"
-    df_salon["Ubicación"] = "Salón"
-    return pd.concat([df_habitacion, df_salon], ignore_index=True)
+    df_habitacion['ubicacion'] = 'Habitación'
+    df_salon['ubicacion'] = 'Salón'
+    return pd.merge(df_habitacion, df_salon, how='outer')
 
 def create_chart(df, x, y, chart_type, title, yaxis_title, xaxis_title=None, height=500, **kwargs):
     fig = chart_type(df, x=x, y=y, **kwargs)
