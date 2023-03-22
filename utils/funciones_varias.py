@@ -28,7 +28,6 @@ def load_data():
     df["Registro_temporal"] = pd.to_datetime(df["Registro_temporal"])
     df = df.set_index(["Ubicación", "Registro_temporal"])
     df = df.sort_index()
-    df = df.set_names(["Ubicación", "Registro_temporal"])
     return df
 
 
