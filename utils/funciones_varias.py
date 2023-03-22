@@ -22,8 +22,8 @@ def create_chart(df, x, y, chart_type, title, yaxis_title, xaxis_title=None, hei
 def load_data():
     df_habitacion = pd.read_csv("data/Habitacion_export_202303182309.csv")
     df_salon = pd.read_csv("data/Salon_export_202303182309.csv")
-    df_habitacion['ubicacion'] = 'Habitación'
-    df_salon['ubicacion'] = 'Salón'
+    df_habitacion['Ubicación'] = 'Habitación'
+    df_salon['Ubicación'] = 'Salón'
     df = pd.merge(df_habitacion, df_salon, how='outer')
     df = df.index.name = "Ubicación"
     return df
