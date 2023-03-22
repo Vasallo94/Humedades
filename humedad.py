@@ -22,4 +22,5 @@ else:
     create_chart(df_seleccionado, "Registro_temporal", "Humedad_relativa[%]", px.line, "Humedad", "Humedad relativa (%)", **chart_config)
     create_chart(df_seleccionado, "Registro_temporal", ["Humedad_relativa[%]", "Temperatura_Celsius"], px.line, "Humedad y temperatura", "Humedad y temperatura", **chart_config)
     create_chart(df_seleccionado, "Humedad_relativa[%]", "Temperatura_Celsius", px.scatter, "Humedad y temperatura (dispersión)", "Temperatura (Celsius)", "Humedad relativa", marginal_y="histogram", marginal_x="histogram", trendline="ols", trendline_color_override="darkseagreen", **chart_config)
-    create_chart(df_seleccionado, "Registro_temporal", ["Humedad_relativa[%]", "Temperatura_Celsius"], px.line, "Humedad y temperatura por ubicación", "Humedad y temperatura", "Tiempo", height=700, facet_col="Ubicación", **chart_config)
+    create_chart(df_seleccionado, "Registro_temporal", ["Humedad_relativa[%]", "Temperatura_Celsius"], px.line, "Humedad y temperatura por ubicación", "Humedad y temperatura", "Tiempo", height=700, facet_col="ubicacion", **chart_config)
+
