@@ -25,8 +25,12 @@ def load_data():
     df_habitacion['Ubicación'] = 'Habitación'
     df_salon['Ubicación'] = 'Salón'
     df = pd.merge(df_habitacion, df_salon, how='outer')
-    df = df.index.name = "Ubicación"
+    df["Registro_temporal"] = pd.to_datetime(df["Registro_temporal"])
+    df = df.set_index(["Ubicación", "Registro_temporal"])
+    df = df.sort_index()
+    df = df.set_names(["Ubicación", "Registro_temporal"])
     return df
+
 
 def create_sidebar(ubicaciones_disponibles, opciones_sampling):
     ubicaciones_predeterminadas = st.sidebar.multiselect("Selecciona la ubicación", ubicaciones_disponibles, default=["Habitación"])
