@@ -41,6 +41,7 @@ def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
     return df_seleccionado
 
 def create_plotly_charts(df_seleccionado):
+    figs = []
     # Line chart for temperature over time
     fig1 = px.line(df_seleccionado, x=df_seleccionado.index, y="Temperatura_Celsius", color="Ubicación",
                    color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
