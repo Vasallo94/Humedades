@@ -25,9 +25,6 @@ def load_data():
     df_habitacion['Ubicación'] = 'Habitación'
     df_salon['Ubicación'] = 'Salón'
     df = pd.merge(df_habitacion, df_salon, how='outer')
-    df["Registro_temporal"] = pd.to_datetime(df["Registro_temporal"])
-    df = df.set_index(["Ubicación", "Registro_temporal"])
-    df = df.sort_index()
     return df
 
 
