@@ -18,7 +18,7 @@ df_seleccionado = filter_data(df, ubicaciones_predeterminadas, sampling_predeter
 
 # Create charts
 figs = create_plotly_charts(df_seleccionado)
-
+st.dataframe(df)
 st.dataframe(df_seleccionado)
 # Display charts
 st.header("Gráficos de temperatura y humedad")
