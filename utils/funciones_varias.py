@@ -41,16 +41,16 @@ def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
     return df_seleccionado
 
 def create_plotly_charts(df_seleccionado):
-    figs = []
     # Line chart for temperature over time
-    fig1 = px.line(df_seleccionado, x=df_seleccionado.index, y="Temperatura_Celsius", color="Humedad_relativa[%]", 
-                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, 
+    fig1 = px.line(df_seleccionado, x=df_seleccionado.index, y="Temperatura_Celsius", color="Ubicación",
+                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
                    labels={"Temperatura_Celsius": "Temperatura (Celsius)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
     fig1.update_layout(title="Temperatura", yaxis_title="Temperatura (Celsius)")
     figs.append(fig1)
+
     # Line chart for humidity over time
-    fig2 = px.line(df_seleccionado, x=df_seleccionado.index, y="Humedad_relativa[%]", color="Humedad_relativa[%]", 
-                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"}, 
+    fig2 = px.line(df_seleccionado, x=df_seleccionado.index, y="Humedad_relativa[%]", color="Ubicación",
+                   color_discrete_map={"Habitación": "#3DDEE0", "Salón": "#E07B3D"},
                    labels={"Humedad_relativa[%]": "Humedad relativa (%)", "Registro_temporal": "Tiempo", "Ubicación": "Ubicación"})
     fig2.update_layout(title="Humedad", yaxis_title="Humedad relativa (%)")
     figs.append(fig2)
