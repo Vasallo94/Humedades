@@ -43,7 +43,7 @@ def create_sidebar(ubicaciones_disponibles, opciones_sampling):
 #     return df_seleccionado
 
 def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
-    df_seleccionado = df.loc[df.index.get_level_values("Ubicación").isin(ubicaciones_predeterminadas)]
+    df_seleccionado = df.loc[df["Ubicación"].isin(ubicaciones_predeterminadas)]
     df_seleccionado["Registro_temporal"] = pd.to_datetime(df_seleccionado["Registro_temporal"])
     df_seleccionado = df_seleccionado.set_index("Registro_temporal")
     df_seleccionado = df_seleccionado.resample(sampling_predeterminado).mean()
