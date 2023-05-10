@@ -3,10 +3,11 @@ import plotly.express as px
 import streamlit as st
 
 
+@st.cache_data
 def load_dataframes():
     try:
-        df_habitacion = pd.read_csv("data/Habitacion_export_202303311347.csv")
-        df_salon = pd.read_csv("data/Salon_export_202303311348.csv")
+        df_habitacion = pd.read_parquet("data/output/habitacion.parquet")
+        df_salon = pd.read_parquet("data/output/salon.parquet")
     except FileNotFoundError:
         st.warning(
             "No se encontraron los archivos CSV. Por favor, asegúrate de que estén en la carpeta 'data' y con los nombres correctos.")
@@ -23,9 +24,10 @@ def create_chart(df, x, y, chart_type, title, yaxis_title, xaxis_title=None, hei
     st.plotly_chart(fig, use_container_width=True, height=height)
 
 
+@st.cache_data
 def load_data():
-    df_habitacion = pd.read_csv("data/Habitacion_export_202303182309.csv")
-    df_salon = pd.read_csv("data/Salon_export_202303182309.csv")
+    df_habitacion = pd.read_parquet("data/output/habitacion.parquet")
+    df_salon = pd.read_parquet("data/output/salon.parquet")
     df_habitacion['Ubicación'] = 'Habitación'
     df_salon['Ubicación'] = 'Salón'
     df = pd.merge(df_habitacion, df_salon, how='outer')
@@ -49,6 +51,7 @@ def create_sidebar(ubicaciones_disponibles, opciones_sampling):
 #     return df_seleccionado
 
 
+@st.cache_data
 def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
     df_seleccionado = df.loc[df["Ubicación"].isin(ubicaciones_predeterminadas)]
     df_seleccionado.loc[:, "Registro_temporal"] = pd.to_datetime(
@@ -66,6 +69,7 @@ def filter_data(df, ubicaciones_predeterminadas, sampling_predeterminado):
 #     return df_seleccionado
 
 
+@st.cache_data
 def create_plotly_charts(df_seleccionado):
     # Line chart for temperature over time
     figs = []

@@ -1,0 +1,3 @@
+Los datos se dividen por Habitación y Salón. 
+
+Cada dato conjunto de dato lleva el nombre de la última medida de ese conjunto de datos.
