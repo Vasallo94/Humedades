@@ -5,7 +5,7 @@ This project is a web application developed using Streamlit that displays temper
 ## Installation
 
 1. Clone the repository:
-`git clone [https://github.com/your-username/home-climate-app.git](https://github.com/Vasallo94/Humedades.git)`
+`git clone https://github.com/Vasallo94/Humedades.git`
 
 2. Install the required packages:
 `pip install -r requirements.txt`
@@ -14,7 +14,7 @@ This project is a web application developed using Streamlit that displays temper
 
 ## Usage
 
-1. Open the Streamlit link https://vasallo94-humedades-humedad-v6q5u4.streamlit.app/ in your browser.
+1. Open the [Streamlit app](https://vasallo94-humedades-humedad-v6q5u4.streamlit.app/) in your browser.
 
 2. Select the location.
 
